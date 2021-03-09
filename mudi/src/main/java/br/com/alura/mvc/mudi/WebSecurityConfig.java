@@ -28,7 +28,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					.defaultSuccessUrl("/home", true) //pagina usada ao autenticar
 					.permitAll() // todos são permitidos acessar a pagina de login
 				)
-			 		.logout(logout -> logout.logoutUrl("/logout")); 
+			 		.logout(logout -> logout.logoutUrl("/logout"))
+			 		.csrf().disable(); //para que seja enviada as requisiçoes do formulario
 		
 	}
 	
