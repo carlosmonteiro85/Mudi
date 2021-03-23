@@ -4,30 +4,14 @@
 		<div th:replace="~{base :: logo}"></div>
 
 		<div class="container">
-			<div th:replace="~{base :: titulo('Meus Pedidos')}"></div>
-		<nav
-			class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between mb-3">
-			<div class="navbar-nav">
-<!-- 				indica que a classe vai receber active de acordo com o resultado do status -->
-				<a th:classappend="${status} == null ? 'active'" class="nav-item nav-link" th:href="@{/usuario/pedido}">Todos</a> 
-				<a th:classappend="${status} == 'aguardando' ? 'active'"  class="nav-item nav-link" th:href="@{/usuario/pedido/aguardando}">Aguardando</a> 
-				<a th:classappend="${status} == 'aprovado' ? 'active'" class="nav-item nav-link" th:href="@{/usuario/pedido/aprovado}">Aprovado</a> 
-				<a th:classappend="${status} == 'entregue' ? 'active'" class="nav-item nav-link" th:href="@{/usuario/pedido/entregue}">Entregue</a>
-			</div>
-			<a href="/pedido/formulario"><button
-					class="btn btn-outline-secondary my-2 my-sm-0">Novo</button></a>
-		</nav>
+			<div th:replace="~{base :: titulo('Útimos Pedidos')}"></div>
 
 <!-- 		foreach do thymeliaf -->
 		<div class="card mb-3" th:each="pedido : ${pedidos}">
 <!-- 		o th:bloque tras uma condição caso o estatus tenha um resultado especifico -->
-			<th:block th:switch="${pedido.status.name()}">
 <!-- 				dentro do block temos os casos			 -->
-				<div th:case="'AGUARDANDO'" class="card-header alert-warning" th:text="${pedido.nomeProduto}">Nome do Produto</div>
-				<div th:case="'APROVADO'" class="card-header alert-success" th:text="${pedido.nomeProduto}">Nome do Produto</div>
-				<div th:case="'ENTREGUE'" class="card-header alert-dark" th:text="${pedido.nomeProduto}">Nome do Produto</div>
+				<div class="card-header alert-dark" th:text="${pedido.nomeProduto}">Nome do Produto</div>
 			
-			</th:block>
 			<div class="card-body">
 				<div class="row">
 					<div class="col-12 col-sm-8 mb-3">

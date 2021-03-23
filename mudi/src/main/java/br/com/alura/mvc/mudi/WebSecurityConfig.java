@@ -21,15 +21,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 		.authorizeRequests()
-			.anyRequest().authenticated() // todas as requisições precisa
+		.antMatchers("/home/**")
+			.permitAll() //paginas permitidas acessar sem autenticação
+		.anyRequest()
+			.authenticated() // todas as requisições precisa
 		.and()
 			.formLogin(form -> form
 					.loginPage("/login")// URL da pagina de login
 					.defaultSuccessUrl("/usuario/pedido", true) //pagina usada ao autenticar
 					.permitAll() // todos são permitidos acessar a pagina de login
 				)
-			 		.logout(logout -> logout.logoutUrl("/logout"))
-			 		.csrf().disable(); //para que seja enviada as requisiçoes do formulario
+			 		.logout(logout -> {
+			 			logout.logoutUrl("/logout")
+			 				.logoutSuccessUrl("/home");
+			 		}).csrf().disable();
+			 		 //para que seja enviada as requisiçoes do formulario
+		
+//			 		.logout(logout -> logout.logoutUrl("/logout"))
+//			 		.csrf().disable(); //para que seja enviada as requisiçoes do formulario
 		
 	}
 	
