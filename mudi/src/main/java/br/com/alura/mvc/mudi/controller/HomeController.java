@@ -3,6 +3,8 @@ package br.com.alura.mvc.mudi.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -23,18 +25,19 @@ public class HomeController {
 	@GetMapping
 	public String home(Model model) {
 
-		List<Pedido> pedidos = pedidosRepository.findByStatus(StatusPedido.ENTREGUE);
+		Sort sort = Sort.by("dataDaEntrega").descending(); // ordenando os pedidos por ordem decrecente de data, pelo SpringData
+
+		PageRequest paginacao = PageRequest.of(0, 10, sort); // aqui traz uma pagina com 10 pedidos no maximo
+
+		List<Pedido> pedidos = pedidosRepository.findByStatus(StatusPedido.ENTREGUE, paginacao);
 		model.addAttribute("pedidos", pedidos);
 		return "home";
 	}
 
-	
-	//quando houver esta exeção ele redirecionara para home
+	// quando houver esta exeção ele redirecionara para home
 	@ExceptionHandler(IllegalArgumentException.class)
 	public String onError() {
 		return "redirect:/home";
 	}
-	
-
 
 }
