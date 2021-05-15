@@ -40,7 +40,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
-<!-- 		dependencia usada para verificar se o usuario esta logado no thymeleafe -->
+<!-- 		dependencia usada para verificar se o usuário esta logado no thymeleafe -->
 		 <dependency>
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
