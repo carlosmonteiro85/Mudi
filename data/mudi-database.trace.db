@@ -1,0 +1,3 @@
+2021-08-23 00:19:53 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "AUTHORITIES" not found; SQL statement:
+insert into authorities (username, authority) values (?,?) [42102-200]
